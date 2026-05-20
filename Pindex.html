@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ponvio Personalvermittlung – Für jede Branche</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700;900&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D2B5C;
+    --navy-mid: #1A3F7A;
+    --navy-light: #1A73E8;
+    --blue-soft: #6BA3E8;
+    --blue-pale: #AACBF5;
+    --white: #FFFFFF;
+    --off-white: #F0F5FF;
+    --gray: #8A9BBF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--navy); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy); padding: 0 60px; height: 70px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .logo-symbol { position: relative; width: 44px; height: 28px; }
+  .logo-symbol .c1 { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; border: 3px solid var(--white); border-radius: 50%; }
+  .logo-symbol .c2 { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; border: 3px solid var(--white); border-radius: 50%; }
+  .logo-symbol .dot { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 10px; height: 10px; background: var(--navy-light); border: 2px solid var(--white); border-radius: 50%; z-index: 2; }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .logo-text .name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; color: var(--white); letter-spacing: 2px; }
+  .logo-text .sub { font-size: 9px; font-weight: 400; color: var(--blue-soft); letter-spacing: 3px; text-transform: uppercase; margin-top: 2px; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { color: var(--blue-pale); text-decoration: none; font-size: 14px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta { background: var(--navy-light) !important; color: var(--white) !important; padding: 10px 22px; border-radius: 4px; font-weight: 600 !important; }
+
+  section { padding: 100px 60px; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--navy-light); margin-bottom: 16px; }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 52px; font-weight: 900; color: var(--navy); line-height: 1; letter-spacing: -0.5px; margin-bottom: 20px; }
+  .section-sub { font-size: 17px; font-weight: 300; color: #4A5568; line-height: 1.7; max-width: 560px; margin-bottom: 60px; }
+
+  /* HERO */
+  #home { min-height: 100vh; background: var(--navy); display: flex; align-items: center; padding: 120px 60px 80px; position: relative; overflow: hidden; }
+  .hero-bg-circles { position: absolute; right: -100px; top: 50%; transform: translateY(-50%); opacity: 0.04; }
+  .hero-bg-circles circle { fill: none; stroke: var(--white); stroke-width: 2; }
+  .hero-content { max-width: 680px; position: relative; z-index: 2; }
+  .hero-badge { display: inline-block; background: rgba(26,115,232,0.2); border: 1px solid rgba(107,163,232,0.4); color: var(--blue-soft); font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; padding: 8px 18px; border-radius: 2px; margin-bottom: 32px; }
+  .hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: 80px; font-weight: 900; color: var(--white); line-height: 0.95; letter-spacing: -1px; margin-bottom: 28px; }
+  .hero-title span { color: var(--navy-light); }
+  .hero-sub { font-size: 18px; font-weight: 300; color: var(--blue-pale); line-height: 1.7; margin-bottom: 48px; max-width: 520px; }
+  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary { background: var(--navy-light); color: var(--white); padding: 16px 36px; font-size: 15px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.2s; }
+  .btn-primary:hover { background: #1560c0; transform: translateY(-1px); }
+  .btn-secondary { background: transparent; color: var(--white); padding: 16px 36px; font-size: 15px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s, transform 0.2s; }
+  .btn-secondary:hover { border-color: var(--white); transform: translateY(-1px); }
+  .hero-stats { display: flex; gap: 48px; margin-top: 64px; padding-top: 48px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 42px; font-weight: 900; color: var(--white); line-height: 1; }
+  .stat-label { font-size: 13px; color: var(--blue-soft); margin-top: 4px; letter-spacing: 1px; }
+
+  /* LEISTUNGEN */
+  #leistungen { background: var(--off-white); }
+  .leistungen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .leistung-card { background: var(--white); border: 1px solid #E2EAF8; border-radius: 8px; padding: 40px 36px; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+  .leistung-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--navy-light); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .leistung-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(13,43,92,0.1); }
+  .leistung-card:hover::before { transform: scaleX(1); }
+  .card-icon { width: 48px; height: 48px; background: rgba(26,115,232,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+  .card-icon svg { width: 24px; height: 24px; stroke: var(--navy-light); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 12px; letter-spacing: 0.5px; }
+  .card-text { font-size: 15px; color: #4A5568; line-height: 1.7; font-weight: 300; }
+
+  /* BRANCHEN */
+  #branchen { background: var(--navy); }
+  .branchen-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .branche-tag { background: rgba(255,255,255,0.06); border: 1px solid rgba(107,163,232,0.2); border-radius: 6px; padding: 20px 24px; color: var(--blue-pale); font-size: 15px; font-weight: 400; letter-spacing: 0.5px; transition: background 0.2s, border-color 0.2s; cursor: default; }
+  .branche-tag:hover { background: rgba(26,115,232,0.15); border-color: var(--navy-light); color: var(--white); }
+  .branche-dot { width: 6px; height: 6px; background: var(--navy-light); border-radius: 50%; display: inline-block; margin-right: 10px; }
+
+  /* ZIELGRUPPEN */
+  .zwei-spalten { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ziel-card { border-radius: 10px; padding: 48px 44px; }
+  .ziel-card.ag { background: var(--navy-mid); }
+  .ziel-card.an { background: var(--off-white); border: 1px solid #E2EAF8; }
+  .ziel-label { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px; }
+  .ag .ziel-label { color: var(--blue-soft); }
+  .an .ziel-label { color: var(--navy-light); }
+  .ziel-title { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+  .ag .ziel-title { color: var(--white); }
+  .an .ziel-title { color: var(--navy); }
+  .ziel-list { list-style: none; margin-bottom: 36px; }
+  .ziel-list li { font-size: 15px; font-weight: 300; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 12px; }
+  .ag .ziel-list li { color: var(--blue-pale); }
+  .an .ziel-list li { border-bottom-color: #E2EAF8; color: #4A5568; }
+  .ziel-list li::before { content: '→'; color: var(--navy-light); font-weight: 600; flex-shrink: 0; }
+
+  /* KONTAKT */
+  #kontakt { background: var(--off-white); }
+  .kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .kontakt-info h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+  .kontakt-info p { font-size: 16px; color: #4A5568; font-weight: 300; line-height: 1.7; margin-bottom: 32px; }
+  .kontakt-detail { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; font-size: 15px; color: var(--navy); font-weight: 400; text-decoration: none; }
+  .kontakt-detail-icon { width: 38px; height: 38px; background: rgba(26,115,232,0.1); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .kontakt-detail-icon svg { width: 18px; height: 18px; stroke: var(--navy-light); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--navy); margin-bottom: 8px; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 18px; background: var(--white); border: 1.5px solid #D1DDEF; border-radius: 6px; font-family: 'Barlow', sans-serif; font-size: 15px; color: var(--navy); outline: none; transition: border-color 0.2s; appearance: none; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--navy-light); }
+  .form-group textarea { height: 120px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* SUCCESS MSG */
+  .success-msg { display: none; background: #E8F5E9; border: 1px solid #A5D6A7; border-radius: 6px; padding: 16px 20px; color: #2E7D32; font-size: 15px; margin-top: 16px; }
+  .success-msg.show { display: block; }
+
+  /* FOOTER */
+  footer { background: var(--navy); padding: 48px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-copy { font-size: 13px; color: var(--gray); }
+  .footer-links { display: flex; gap: 28px; list-style: none; }
+  .footer-links a { font-size: 13px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-badge { animation: fadeUp 0.5s ease forwards; }
+  .hero-title { animation: fadeUp 0.5s 0.1s ease forwards; opacity: 0; }
+  .hero-sub { animation: fadeUp 0.5s 0.2s ease forwards; opacity: 0; }
+  .hero-buttons { animation: fadeUp 0.5s 0.3s ease forwards; opacity: 0; }
+  .hero-stats { animation: fadeUp 0.5s 0.4s ease forwards; opacity: 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo" onclick="showPage('home');return false;">
+    <div class="logo-symbol">
+      <div class="c1"></div><div class="c2"></div><div class="dot"></div>
+    </div>
+    <div class="logo-text">
+      <span class="name">PONVIO</span>
+      <span class="sub">Personalvermittlung</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
+    <li><a href="#" onclick="showPage('leistungen');return false;">Leistungen</a></li>
+    <li><a href="#" onclick="showPage('branchen');return false;">Branchen</a></li>
+    <li><a href="#" onclick="showPage('kontakt');return false;" class="nav-cta">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <section id="home">
+    <svg class="hero-bg-circles" width="600" height="600" viewBox="0 0 600 600">
+      <circle cx="300" cy="300" r="280"/><circle cx="300" cy="300" r="220"/>
+      <circle cx="300" cy="300" r="160"/><circle cx="300" cy="300" r="100"/>
+    </svg>
+    <div class="hero-content">
+      <div class="hero-badge">Personalvermittlung für jede Branche</div>
+      <h1 class="hero-title">Wir verbinden<br><span>Talente</span> mit<br>Unternehmen.</h1>
+      <p class="hero-sub">Ponvio vermittelt qualifiziertes Personal schnell, zuverlässig und branchenübergreifend — von Reinigung über Bau bis hin zu Industrie und Verwaltung.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary" onclick="showPage('kontakt');return false;">Personal anfragen</a>
+        <a href="#" class="btn-secondary" onclick="showPage('leistungen');return false;">Unsere Leistungen</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">100%</div><div class="stat-label">Branchenübergreifend</div></div>
+        <div><div class="stat-num">48h</div><div class="stat-label">Schnelle Vermittlung</div></div>
+        <div><div class="stat-num">München</div><div class="stat-label">Unser Standort</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- LEISTUNGEN -->
+<div id="page-leistungen" class="page">
+  <section id="leistungen" style="margin-top:70px;">
+    <div class="section-label">Was wir anbieten</div>
+    <h2 class="section-title">Unsere Leistungen</h2>
+    <p class="section-sub">Von der Festanstellung bis zur flexiblen Arbeitnehmerüberlassung — wir bieten die passende Lösung für jedes Unternehmen.</p>
+    <div class="leistungen-grid">
+      <div class="leistung-card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="card-title">Personalvermittlung</div>
+        <p class="card-text">Wir finden den richtigen Kandidaten für Ihre Festanstellung. Schnelle, zielgerichtete Suche mit direkter Vermittlung — ohne Umwege.</p>
+      </div>
+      <div class="leistung-card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="card-title">Arbeitnehmerüberlassung</div>
+        <p class="card-text">Flexible Arbeitskräfte für Ihren Betrieb — kurzfristig, saisonal oder projektbezogen. Unsere Mitarbeiter bleiben bei uns angestellt.</p>
+      </div>
+      <div class="leistung-card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <div class="card-title">Recruiting</div>
+        <p class="card-text">Aktive Kandidatensuche für schwer besetzbare Stellen. Wir übernehmen die Vorauswahl und präsentieren Ihnen nur geprüfte Profile.</p>
+      </div>
+      <div class="leistung-card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="card-title">Bewerberberatung</div>
+        <p class="card-text">Als Jobsuchender unterstützen wir dich bei der Stellensuche, bereiten dich auf Vorstellungsgespräche vor und begleiten dich bis zur Zusage.</p>
+      </div>
+      <div class="leistung-card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="card-title">Zuverlässige Vorauswahl</div>
+        <p class="card-text">Jeder Kandidat wird vorab geprüft — Qualifikationen, Verfügbarkeit, Zuverlässigkeit. Sie erhalten nur passende Vorschläge.</p>
+      </div>
+      <div class="leistung-card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.58 5 2 2 0 0 1 3.56 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.5a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 18z"/></svg></div>
+        <div class="card-title">Persönliche Betreuung</div>
+        <p class="card-text">Kein Call-Center. Bei Ponvio haben Sie immer einen direkten Ansprechpartner — erreichbar, verbindlich, lösungsorientiert.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- BRANCHEN -->
+<div id="page-branchen" class="page">
+  <section id="branchen" style="margin-top:70px;">
+    <div class="section-label">Unsere Expertise</div>
+    <h2 class="section-title" style="color:var(--white)">Für jede Branche</h2>
+    <p class="section-sub" style="color:var(--blue-pale)">Wir vermitteln Personal in zahlreichen Branchen — vom Handwerk bis zur Verwaltung.</p>
+    <div class="branchen-grid">
+      <div class="branche-tag"><span class="branche-dot"></span>Reinigung & Facility</div>
+      <div class="branche-tag"><span class="branche-dot"></span>Bau & Handwerk</div>
+      <div class="branche-tag"><span class="branche-dot"></span>Logistik & Transport</div>
+      <div class="branche-tag"><span class="branche-dot"></span>Gastronomie & Hotel</div>
+      <div class="branche-tag"><span class="branche-dot"></span>Industrie & Produktion</div>
+      <div class="branche-tag"><span class="branche-dot"></span>Pflege & Soziales</div>
+      <div class="branche-tag"><span class="branche-dot"></span>Büro & Verwaltung</div>
+      <div class="branche-tag"><span class="branche-dot"></span>Einzelhandel</div>
+      <div class="branche-tag"><span class="branche-dot"></span>IT & Technik</div>
+      <div class="branche-tag"><span class="branche-dot"></span>Sicherheitsdienst</div>
+      <div class="branche-tag"><span class="branche-dot"></span>Eventmanagement</div>
+      <div class="branche-tag"><span class="branche-dot"></span>Weitere auf Anfrage</div>
+    </div>
+    <div class="zwei-spalten" style="margin-top:60px;">
+      <div class="ziel-card ag">
+        <div class="ziel-label">Für Arbeitgeber</div>
+        <div class="ziel-title">Sie suchen Personal?</div>
+        <ul class="ziel-list">
+          <li>Schnelle Besetzung offener Stellen</li>
+          <li>Geprüfte, zuverlässige Kandidaten</li>
+          <li>Fest- und Zeitanstellung möglich</li>
+          <li>Branchenübergreifende Expertise</li>
+          <li>Persönlicher Ansprechpartner</li>
+        </ul>
+        <a href="#" class="btn-primary" onclick="showPage('kontakt');return false;">Jetzt anfragen</a>
+      </div>
+      <div class="ziel-card an">
+        <div class="ziel-label">Für Arbeitnehmer</div>
+        <div class="ziel-title">Sie suchen einen Job?</div>
+        <ul class="ziel-list">
+          <li>Kostenlose Vermittlung für Bewerber</li>
+          <li>Stellen in Ihrer Wunschbranche</li>
+          <li>Begleitung bis zur Zusage</li>
+          <li>Faire Arbeitsbedingungen</li>
+          <li>Schnelle Rückmeldung</li>
+        </ul>
+        <a href="#" class="btn-primary" onclick="showPage('kontakt');return false;">Jetzt bewerben</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- KONTAKT -->
+<div id="page-kontakt" class="page">
+  <section id="kontakt" style="margin-top:70px;">
+    <div class="section-label">Sprechen wir</div>
+    <h2 class="section-title">Kontakt</h2>
+    <p class="section-sub">Egal ob Sie Personal suchen oder einen Job — schreiben Sie uns. Wir melden uns innerhalb von 24 Stunden.</p>
+    <div class="kontakt-grid">
+      <div class="kontakt-info">
+        <h3>Ponvio Personalvermittlung</h3>
+        <p>Ihr Ansprechpartner für Personalvermittlung und Arbeitnehmerüberlassung in München und Umgebung.</p>
+        <div class="kontakt-detail">
+          <div class="kontakt-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          Am Hartmannshofer Bächl 42, 80997 München
+        </div>
+        <a href="mailto:ponvio.hilfe@gmail.com" class="kontakt-detail" style="color:var(--navy-light);">
+          <div class="kontakt-detail-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          ponvio.hilfe@gmail.com
+        </a>
+        <a href="tel:+4915567174313" class="kontakt-detail" style="color:var(--navy-light);">
+          <div class="kontakt-detail-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.58 5 2 2 0 0 1 3.56 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.5a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 18z"/></svg></div>
+          +49 155 67174313
+        </a>
+      </div>
+      <div class="kontakt-form">
+        <div class="form-row">
+          <div class="form-group"><label>Vorname</label><input type="text" id="vorname" placeholder="Max"></div>
+          <div class="form-group"><label>Nachname</label><input type="text" id="nachname" placeholder="Mustermann"></div>
+        </div>
+        <div class="form-group"><label>E-Mail</label><input type="email" id="email" placeholder="max@mustermann.de"></div>
+        <div class="form-group"><label>Telefon (optional)</label><input type="tel" id="telefon" placeholder="+49 ..."></div>
+        <div class="form-group">
+          <label>Ich bin</label>
+          <select id="typ">
+            <option value="">Bitte auswählen</option>
+            <option>Arbeitgeber – ich suche Personal</option>
+            <option>Arbeitnehmer – ich suche einen Job</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Branche</label><input type="text" id="branche" placeholder="z.B. Reinigung, Bau, Logistik..."></div>
+        <div class="form-group"><label>Nachricht</label><textarea id="nachricht" placeholder="Beschreiben Sie kurz Ihr Anliegen..."></textarea></div>
+        <button class="btn-primary" style="width:100%" onclick="sendMail()">Nachricht senden →</button>
+        <div class="success-msg" id="successMsg">✓ Vielen Dank! Wir melden uns innerhalb von 24 Stunden bei Ihnen.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 Ponvio Personalvermittlung · Neron Helic · München</div>
+  <ul class="footer-links">
+    <li><a href="impressum.html">Impressum</a></li>
+    <li><a href="datenschutz.html">Datenschutz</a></li>
+    <li><a href="agb.html">AGB</a></li>
+  </ul>
+</footer>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function sendMail() {
+  const vorname = document.getElementById('vorname').value;
+  const nachname = document.getElementById('nachname').value;
+  const email = document.getElementById('email').value;
+  const telefon = document.getElementById('telefon').value;
+  const typ = document.getElementById('typ').value;
+  const branche = document.getElementById('branche').value;
+  const nachricht = document.getElementById('nachricht').value;
+
+  if (!vorname || !email || !typ || !nachricht) {
+    alert('Bitte füllen Sie alle Pflichtfelder aus.');
+    return;
+  }
+
+  const subject = encodeURIComponent('Anfrage über ponviopersonal.de – ' + typ);
+  const body = encodeURIComponent(
+    'Name: ' + vorname + ' ' + nachname + '\n' +
+    'E-Mail: ' + email + '\n' +
+    'Telefon: ' + (telefon || 'nicht angegeben') + '\n' +
+    'Ich bin: ' + typ + '\n' +
+    'Branche: ' + (branche || 'nicht angegeben') + '\n\n' +
+    'Nachricht:\n' + nachricht
+  );
+
+  window.location.href = 'mailto:ponvio.hilfe@gmail.com?subject=' + subject + '&body=' + body;
+  document.getElementById('successMsg').classList.add('show');
+}
+</script>
+</body>
+</html>
